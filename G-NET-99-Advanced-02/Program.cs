@@ -29,6 +29,11 @@
             Console.WriteLine("\n--- Clothing Under $100 ---");
             List<Product> cheapClothing = SearchProducts(catalog, p => p.Category == "Clothing" && p.Price < 100);
             PrintProducts(cheapClothing);
+            //Task 3 Part 3.1 Print Reports 
+            Console.WriteLine("--- Short Report ---");
+            PrintReport(catalog, p => Console.WriteLine($"{p.Name} - ${p.Price}"));
+            Console.WriteLine("\n--- Detailed Report ---");
+            PrintReport(catalog, p => Console.WriteLine($"[{p.Category}] {p.Name} | Price: ${p.Price} | Stock: {p.Stock}"));
         }
         public static List<Product> SearchProducts(List<Product> products, Func<Product, bool> filter)
         {
@@ -47,6 +52,13 @@
             foreach (Product p in productsList)
             {
                 Console.WriteLine($"{p.Name} - ${p.Price} (Stock: {p.Stock})");
+            }
+        }
+        public static void PrintReport(List<Product> products, Action<Product> printAction)
+        {
+            foreach (Product product in products)
+            {
+                printAction(product);
             }
         }
     }
