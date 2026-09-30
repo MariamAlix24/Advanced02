@@ -34,6 +34,19 @@
             PrintReport(catalog, p => Console.WriteLine($"{p.Name} - ${p.Price}"));
             Console.WriteLine("\n--- Detailed Report ---");
             PrintReport(catalog, p => Console.WriteLine($"[{p.Category}] {p.Name} | Price: ${p.Price} | Stock: {p.Stock}"));
+            //Task 3 Part 3.2. Transform Products 
+            Console.WriteLine("--- Summary List ---");
+            List<string> summaryList = TransformProducts(catalog, p => $"{p.Name} (${p.Price})");
+            foreach (string item in summaryList)
+            {
+                Console.WriteLine(item);
+            }
+            Console.WriteLine("\n--- Price Labels ---");
+            List<string> priceLabels = TransformProducts(catalog, p => p.Price > 100 ? $"{p.Name}: Expensive!" : $"{p.Name}: Affordable");
+            foreach (string item in priceLabels)
+            {
+                Console.WriteLine(item);
+            }
         }
         public static List<Product> SearchProducts(List<Product> products, Func<Product, bool> filter)
         {
@@ -61,5 +74,15 @@
                 printAction(product);
             }
         }
+        public static List<string> TransformProducts(List<Product> products, Func<Product, string> transformer)
+        {
+            List<string> result = new List<string>();
+            foreach (Product product in products)
+            {
+                result.Add(transformer(product));
+            }
+            return result;
+        }
     }
+
 }
