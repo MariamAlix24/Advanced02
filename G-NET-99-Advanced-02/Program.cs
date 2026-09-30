@@ -55,6 +55,7 @@
                 Console.WriteLine($"[LOW STOCK] {p.Name}: only {p.Stock} left!");
             }
         }
+        // Used Func<Product, bool> because it takes a Product as input and returns a boolean (true/false) to filter products
         public static List<Product> SearchProducts(List<Product> products, Func<Product, bool> filter)
         {
             List<Product> result = new List<Product>();
@@ -74,6 +75,7 @@
                 Console.WriteLine($"{p.Name} - ${p.Price} (Stock: {p.Stock})");
             }
         }
+        // Used Action<Product> because it receives a Product and performs an action (printing) without returning any value (void)
         public static void PrintReport(List<Product> products, Action<Product> printAction)
         {
             foreach (Product product in products)
@@ -81,6 +83,7 @@
                 printAction(product);
             }
         }
+        // Used Func<Product, string> because it takes a Product and transforms it into a new string output
         public static List<string> TransformProducts(List<Product> products, Func<Product, string> transformer)
         {
             List<string> result = new List<string>();
@@ -90,6 +93,7 @@
             }
             return result;
         }
+        // Used Predicate<Product> because it is a specialized delegate that tests a Product against a condition and returns true or false
         public static List<Product> FilterProducts(List<Product> products, Predicate<Product> match)
         {
             List<Product> result = new List<Product>();
