@@ -47,6 +47,13 @@
             {
                 Console.WriteLine(item);
             }
+            //Task 3 Part 3.3. Filter Products 
+            Console.WriteLine("--- Low-Stock Alert ---");
+            List<Product> lowStockProducts = FilterProducts(catalog, p => p.Stock < 20);
+            foreach (Product p in lowStockProducts)
+            {
+                Console.WriteLine($"[LOW STOCK] {p.Name}: only {p.Stock} left!");
+            }
         }
         public static List<Product> SearchProducts(List<Product> products, Func<Product, bool> filter)
         {
@@ -80,6 +87,18 @@
             foreach (Product product in products)
             {
                 result.Add(transformer(product));
+            }
+            return result;
+        }
+        public static List<Product> FilterProducts(List<Product> products, Predicate<Product> match)
+        {
+            List<Product> result = new List<Product>();
+            foreach (Product product in products)
+            {
+                if (match(product) == true)
+                {
+                    result.Add(product);
+                }
             }
             return result;
         }
